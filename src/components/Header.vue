@@ -56,6 +56,7 @@ const isLoggin = ref(false)
   padding: 16px 24px;
   border-bottom: 1px solid $color-gray-light;
   background-color: $color-white;
+  height: 80px;
 }
 
 .nav {

@@ -9,8 +9,9 @@ import Header from '@/components/Header.vue'
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .content {
-  margin-top: 100px;
+  margin-top: 80px;
+  height: calc(100vh - 80px);
 }
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 interface Props {
-  variant?: 'primary' | 'secondary' | 'outline'
+  variant?: 'primary' | 'outline'
   size?: 'small' | 'medium' | 'large'
   disabled?: boolean
 }
@@ -76,7 +76,7 @@ withDefaults(defineProps<Props>(), {
     font-size: 18px;
   }
 
-  // Disabled state
+  // Disabled
   &--disabled {
     opacity: 0.5;
     cursor: not-allowed;
