@@ -132,7 +132,7 @@ const handleSubmit = async () => {
           >회원 가입
         </Button>
 
-        <div class="login--nav">
+        <div class="signin--nav">
           <span>이미 계정이 있으신가요?</span>
           <RouterLink to="/signin">
             <span class="text">로그인</span>
@@ -168,19 +168,7 @@ const handleSubmit = async () => {
   gap: 1.5rem;
 }
 
-.form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  label {
-    font-weight: 500;
-    color: $color-gray-dark;
-    font-size: 14px;
-  }
-}
-
-.login--nav {
+.signin--nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;

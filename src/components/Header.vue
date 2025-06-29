@@ -24,7 +24,7 @@ const isLoggin = ref(false)
         </div>
         <div>
           <div v-if="isLoggin === false">
-            <RouterLink to="/singin">
+            <RouterLink to="/signin">
               <Button
                 size="small"
                 variant="outline"
