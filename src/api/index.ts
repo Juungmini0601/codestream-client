@@ -1,4 +1,4 @@
-import type { AxiosInstance, AxiosResponse } from 'axios'
+import type { AxiosInstance } from 'axios'
 import axios from 'axios'
 
 export const ResultType = {
@@ -39,10 +39,9 @@ class ApiClient {
       timeout: 10000,
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      withCredentials: true
     })
-
-    this.setupInterceptors()
   }
 
   async get<T = any>(url: string, params?: any): Promise<ApiResponse<T>> {
@@ -68,35 +67,6 @@ class ApiClient {
   async patch<T = any>(url: string, data?: any): Promise<ApiResponse<T>> {
     const response = await this.axiosInstance.patch(url, data)
     return response.data
-  }
-
-  private setupInterceptors() {
-    this.axiosInstance.interceptors.response.use(
-      (response: AxiosResponse<ApiResponse>) => {
-        return response
-      },
-      error => {
-        if (error.response) {
-          return Promise.resolve(error.response)
-        }
-
-        const networkErrorResponse: ApiResponse = {
-          result: ResultType.ERROR,
-          data: null,
-          error: {
-            code: ErrorType.NETWORK_ERROR,
-            message: 'Network connection failed',
-            data: error.message
-          }
-        }
-
-        return Promise.resolve({
-          data: networkErrorResponse,
-          status: 0,
-          statusText: 'Network Error'
-        })
-      }
-    )
   }
 }
 

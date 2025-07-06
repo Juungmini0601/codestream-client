@@ -2,14 +2,15 @@
 import Input from '@/components/Input.vue'
 import { ref } from 'vue'
 import Button from '@/components/Button.vue'
-import { apiClient } from '@/api'
 import { useRouter } from 'vue-router'
 import GoogleLoginIcon from '@/components/GoogleLoginIcon.vue'
 import KakaoLoginIcon from '@/components/KakaoLoginIcon.vue'
+import { useUserStore } from '@/stores/users'
 
 const SERVER_URL = `http://${import.meta.env.VITE_SERVER_BASE_URL}`
 
 const router = useRouter()
+const userStore = useUserStore()
 const email = ref()
 const password = ref()
 
@@ -17,12 +18,9 @@ const emailValidation = ref(false)
 const passwordValidation = ref(false)
 
 const handleSubmit = async () => {
-  const response = await apiClient.post<void>('/auth/signin', {
-    email: email.value,
-    password: password.value
-  })
+  const success = await userStore.login(email.value, password.value)
 
-  if (response.result === 'SUCCESS') {
+  if (success) {
     alert('로그인이 완료 되었습니다.')
     router.push('/')
     return
