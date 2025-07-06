@@ -1,9 +1,10 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
 import Button from '@/components/Button.vue'
 import Input from '@/components/Input.vue'
 import { apiClient } from '@/api'
-import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const email = ref('')
@@ -20,7 +21,7 @@ const handleValidation = (isValid: boolean) => {
 }
 
 const sendVerificationButtonHandler = async () => {
-  const response = await apiClient.post<void>('/auth/verification-code', {
+  const response = await apiClient.post<void>('/api/v1/auth/verification-code', {
     email: email.value
   })
 
@@ -31,7 +32,7 @@ const sendVerificationButtonHandler = async () => {
 }
 
 const checkVerificationCodeButtonHandler = async () => {
-  const response = await apiClient.post<void>('/auth/verification-code/check', {
+  const response = await apiClient.post<void>('/api/v1/auth/verification-code/check', {
     email: email.value,
     code: verificationCode.value
   })
@@ -47,7 +48,7 @@ const checkVerificationCodeButtonHandler = async () => {
 }
 
 const handleSubmit = async () => {
-  const response = await apiClient.post<void>('/auth/signup', {
+  const response = await apiClient.post<void>('/api/v1/users', {
     email: email.value,
     password: password.value,
     nickname: nickname.value

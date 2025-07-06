@@ -4,6 +4,10 @@ import { ref } from 'vue'
 import Button from '@/components/Button.vue'
 import { apiClient } from '@/api'
 import { useRouter } from 'vue-router'
+import GoogleLoginIcon from '@/components/GoogleLoginIcon.vue'
+import KakaoLoginIcon from '@/components/KakaoLoginIcon.vue'
+
+const SERVER_URL = `http://${import.meta.env.VITE_SERVER_BASE_URL}`
 
 const router = useRouter()
 const email = ref()
@@ -69,6 +73,22 @@ const handleSubmit = async () => {
             <span class="text">회원가입</span>
           </RouterLink>
         </div>
+
+        <div class="divider"></div>
+
+        <div class="social-login-btn-wrapper">
+          <a
+            :href="`${SERVER_URL}/api/v1/auth/google/login`"
+            class="social-login-btn">
+            <GoogleLoginIcon />
+          </a>
+
+          <a
+            :href="`${SERVER_URL}/api/v1/auth/kakao/login`"
+            class="social-login-btn kakao-btn">
+            <KakaoLoginIcon />
+          </a>
+        </div>
       </form>
     </div>
   </div>
@@ -109,6 +129,50 @@ const handleSubmit = async () => {
     color: $color-primary;
     font-weight: bold;
     text-decoration: underline;
+  }
+}
+
+.divider {
+  height: 1px;
+  border-bottom: 1px solid lightgray;
+}
+
+.social-login-btn-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+}
+
+.social-login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  border: 2px solid #e2e8f0;
+  background-color: white;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &.kakao-btn {
+    background-color: #fee500;
+    border-color: #fee500;
+
+    &:hover {
+      background-color: #ffeb3b;
+      border-color: #ffeb3b;
+    }
   }
 }
 </style>
